@@ -10,10 +10,6 @@ import javax.persistence.Id;
 @Entity
 public class User extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
-
     @NotNull
     private String username;
 
@@ -22,9 +18,23 @@ public class User extends AbstractEntity {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+    public User() {}
+
     public User(String username, String password) {
         this.username = username;
         this.pwHash = encoder.encode(password);
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPwHash() {
+        return pwHash;
+    }
+
+    public void setPwHash(String pwHash) {
+        this.pwHash = pwHash;
     }
 
     public String getUsername() {
